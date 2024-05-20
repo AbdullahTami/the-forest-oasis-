@@ -5,7 +5,7 @@ import { CabinType } from "@/app/_components/CabinCard";
 /////////////
 // GET
 
-export async function getCabin(id) {
+export async function getCabin(id: string): Promise<CabinType> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
