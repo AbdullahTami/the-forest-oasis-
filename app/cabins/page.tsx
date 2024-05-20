@@ -1,9 +1,11 @@
 import CabinCard from "@/app/_components/CabinCard";
 import { type CabinType } from "@/app/_components/CabinCard";
+import { getCabins } from "../_lib/data-service";
 
-export default function Page() {
+export default async function Page() {
   // CHANGE
-  const cabins: CabinType[] = [];
+  const cabins: CabinType[] = await getCabins();
+  console.log(cabins);
 
   return (
     <div>
