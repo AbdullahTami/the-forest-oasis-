@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+
 @layer components {
   .spinner {
     margin: 3.2rem auto 1.6rem;
@@ -28,7 +28,7 @@
       transform: rotate(1turn);
     }
   }
-} */
+}
 
 /* For data picker */
 /* .rdp {
