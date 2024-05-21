@@ -2,8 +2,10 @@ import React from "react";
 import { type CabinType } from "@/app/_components/CabinCard";
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
+// import { unstable_noStore as noStore } from "next/cache";
 
 export default async function CabinsList() {
+  // noStore();
   const cabins: CabinType[] = await getCabins();
 
   if (!cabins.length) return null;
