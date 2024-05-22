@@ -1,12 +1,14 @@
 import { Suspense } from "react";
-import CabinsList from "../_components/CabinsList";
-import Spinner from "../_components/Spinner";
+import CabinsList from "@/app/_components/CabinsList";
+import Spinner from "@/app/_components/Spinner";
+import Filter from "../_components/Filter";
 
 export const metadata = {
   title: "Cabins",
 };
 
-export const revalidate = 3600;
+// searchParams would eventually render page dynamically
+// export const revalidate = 3600;
 
 export type FilterValues = "all" | "large" | "medium" | "small";
 
@@ -30,7 +32,10 @@ export default function Page({ searchParams }: { searchParams: SearchParams }) {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-      <Suspense fallback={<Spinner />}>
+      <div className="flex justify-end mb-8">
+        <Filter />
+      </div>
+      <Suspense fallback={<Spinner />} key={filter}>
         <CabinsList filter={filter} />
       </Suspense>
     </div>

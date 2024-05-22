@@ -1,8 +1,8 @@
 import React from "react";
 import { type CabinType } from "@/app/_components/CabinCard";
 import CabinCard from "@/app/_components/CabinCard";
-import { getCabins } from "../_lib/data-service";
-import { FilterValues } from "../cabins/page";
+import { getCabins } from "@/app/_lib/data-service";
+import { type FilterValues } from "@/app/cabins/page";
 // import { unstable_noStore as noStore } from "next/cache";
 
 export default async function CabinsList({ filter }: { filter: FilterValues }) {
