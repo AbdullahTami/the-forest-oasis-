@@ -8,10 +8,10 @@ export const metadata = {
 
 export const revalidate = 3600;
 
+export type FilterValues = "all" | "large" | "medium" | "small";
+
 export type SearchParams = {
-  capacity: string;
-  medium: string;
-  large: string;
+  capacity: FilterValues;
 };
 
 export default function Page({ searchParams }: { searchParams: SearchParams }) {
