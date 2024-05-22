@@ -8,7 +8,15 @@ export const metadata = {
 
 export const revalidate = 3600;
 
-export default function Page() {
+export type SearchParams = {
+  capacity: string;
+  medium: string;
+  large: string;
+};
+
+export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  console.log(searchParams);
+  const filter = searchParams?.capacity ?? "all";
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -23,7 +31,7 @@ export default function Page() {
         Welcome to paradise.
       </p>
       <Suspense fallback={<Spinner />}>
-        <CabinsList />
+        <CabinsList filter={filter} />
       </Suspense>
     </div>
   );

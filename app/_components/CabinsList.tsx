@@ -2,10 +2,14 @@ import React from "react";
 import { type CabinType } from "@/app/_components/CabinCard";
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
+import { SearchParams } from "../cabins/page";
 // import { unstable_noStore as noStore } from "next/cache";
 
-export default async function CabinsList() {
+export default async function CabinsList({ filter }: { filter: string }) {
   // noStore();
+
+  console.log(filter);
+
   const cabins: CabinType[] = await getCabins();
 
   if (!cabins.length) return null;
