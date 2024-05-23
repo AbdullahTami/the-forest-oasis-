@@ -1,19 +1,10 @@
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { type Cabin } from "../_lib/types";
 
 // PLACEHOLDER DATA
 
-export type CabinType = {
-  id: number;
-  name: string;
-  maxCapacity: number;
-  regularPrice: number;
-  discount: number;
-  description?: string;
-  image: string;
-};
-
-export default function Page({ cabin }: { cabin: CabinType }) {
+export default function Page({ cabin }: { cabin: Cabin }) {
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
 

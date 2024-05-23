@@ -1,12 +1,13 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
-import { CabinType } from "@/app/_components/CabinCard";
 import { notFound } from "next/navigation";
+import { Country } from "../_components/SelectCountry";
+import { type Settings, type Cabin } from "./types";
 
 /////////////
 // GET
 
-export async function getCabin(id: string): Promise<CabinType> {
+export async function getCabin(id: string): Promise<Cabin> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -14,7 +15,7 @@ export async function getCabin(id: string): Promise<CabinType> {
     .single();
 
   // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
+  // await new Promise((res) => setTimeout(res, 3000));
 
   if (error) {
     console.error(error);
@@ -38,7 +39,7 @@ export async function getCabinPrice(id) {
   return data;
 }
 
-export const getCabins = async function (): Promise<CabinType[]> {
+export const getCabins = async function (): Promise<Cabin[]> {
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
@@ -97,8 +98,8 @@ export async function getBookings(guestId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId) {
-  let today = new Date();
+export async function getBookedDatesByCabinId(cabinId: string) {
+  let today: Date | string = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
@@ -127,8 +128,9 @@ export async function getBookedDatesByCabinId(cabinId) {
   return bookedDates;
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from("settings").select("*").single();
+  // await new Promise((res) => setTimeout(res, 3000));
 
   if (error) {
     console.error(error);
@@ -138,14 +140,16 @@ export async function getSettings() {
   return data;
 }
 
-export async function getCountries() {
+export async function getCountries(): Promise<Country[]> {
   try {
     const res = await fetch(
       "https://restcountries.com/v2/all?fields=name,flag"
     );
-    const countries = await res.json();
+    const countries: Country[] = await res.json();
     return countries;
-  } catch {
+  } catch (error) {
+    console.log(error);
+
     throw new Error("Could not fetch countries");
   }
 }
