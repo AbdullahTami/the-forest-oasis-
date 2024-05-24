@@ -16,3 +16,7 @@ export type Settings = {
   maxGuestPerBooking: number;
   breakfastPrice: number;
 };
+
+export type Params = {
+  cabinId: string;
+};
