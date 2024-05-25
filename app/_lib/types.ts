@@ -20,3 +20,9 @@ export type Settings = {
 export type Params = {
   cabinId: string;
 };
+
+export type User = {
+  name: string;
+  email: string;
+  image: string;
+};
