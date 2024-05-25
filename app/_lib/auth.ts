@@ -15,6 +15,11 @@ const authConfig = {
       },
     }),
   ],
+  callbacks: {
+    authorized({ auth }: { auth: any }) {
+      return !!auth?.user;
+    },
+  },
 };
 export const {
   handlers: { GET, POST },
