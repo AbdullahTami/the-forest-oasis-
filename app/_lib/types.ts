@@ -22,6 +22,7 @@ export type Params = {
 };
 
 export type User = {
+  guestId: string;
   name: string;
   email: string;
   image: string;

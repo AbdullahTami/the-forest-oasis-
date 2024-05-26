@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import { createGuest, getGuest } from "./data-service";
 
 const authConfig = {
   providers: [
@@ -19,7 +20,27 @@ const authConfig = {
     authorized({ auth }: { auth: any }) {
       return !!auth?.user;
     },
+    // async signIn({ user, account, profile }) {
+    async signIn({ user }: any) {
+      try {
+        const existingGuest = await getGuest(user.email);
+        if (!existingGuest)
+          await createGuest({ email: user.email, fullName: user.name });
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    // async session({ session, user }) {},
+    async session({ session }: any) {
+      console.log(session);
+
+      const guest = await getGuest(session.user.email);
+      session.user.guestId = guest.id;
+      return session;
+    },
   },
+
   pages: {
     signIn: "/login",
   },

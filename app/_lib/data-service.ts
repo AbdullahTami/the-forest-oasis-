@@ -4,6 +4,16 @@ import { notFound } from "next/navigation";
 import { Country } from "../_components/SelectCountry";
 import { type Settings, type Cabin } from "./types";
 
+type Guest = {
+  id: number;
+  created_at: Date;
+  fullName: string;
+  email: string;
+  nationality?: string;
+  nationalID?: string;
+  countryFlag?: string;
+};
+
 /////////////
 // GET
 
@@ -54,7 +64,7 @@ export const getCabins = async function (): Promise<Cabin[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email) {
+export async function getGuest(email: string): Promise<Guest > {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -157,7 +167,10 @@ export async function getCountries(): Promise<Country[]> {
 /////////////
 // CREATE
 
-export async function createGuest(newGuest) {
+export async function createGuest(newGuest: {
+  email?: string;
+  fullName?: string;
+}): Promise<Guest | null> {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
