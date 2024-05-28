@@ -1,7 +1,7 @@
 import ReservationCard from "@/app/_components/ReservationCard";
 import { auth } from "@/app/_lib/auth";
 import { getBookings } from "@/app/_lib/data-service";
-import { ExtendedUserType } from "@/app/_lib/types";
+import { Booking, ExtendedUserType } from "@/app/_lib/types";
 
 export const metadata = {
   title: "Reservations",
@@ -10,7 +10,7 @@ export const metadata = {
 export default async function Page() {
   const session = await auth();
   if (!session) throw new Error("You need to be logged in");
-  const bookings = await getBookings(
+  const bookings: Booking[] = await getBookings(
     (session.user as ExtendedUserType).guestId
   );
 

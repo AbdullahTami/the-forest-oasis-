@@ -1,7 +1,7 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { notFound } from "next/navigation";
-import { type Country, type Settings, type Cabin, type Guest } from "./types";
+import { type Country, type Settings, type Cabin, type Guest, Booking } from "./types";
 
 /////////////
 // GET
@@ -81,7 +81,7 @@ export async function getBooking(id) {
   return data;
 }
 
-export async function getBookings(guestId) {
+export async function getBookings(guestId: number):Promise<Booking[]> {
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
