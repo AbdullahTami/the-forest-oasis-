@@ -1,18 +1,7 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { notFound } from "next/navigation";
-import { Country } from "../_components/SelectCountry";
-import { type Settings, type Cabin } from "./types";
-
-type Guest = {
-  id: number;
-  created_at: Date;
-  fullName: string;
-  email: string;
-  nationality?: string;
-  nationalID?: string;
-  countryFlag?: string;
-};
+import { type Country, type Settings, type Cabin, type Guest } from "./types";
 
 /////////////
 // GET
@@ -64,7 +53,9 @@ export const getCabins = async function (): Promise<Cabin[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string): Promise<Guest > {
+export async function getGuest(
+  email: string | undefined | null
+): Promise<Guest> {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -153,10 +144,10 @@ export async function getSettings(): Promise<Settings> {
 export async function getCountries(): Promise<Country[]> {
   try {
     const res = await fetch(
-      "https://restcountries.com/v2/all?fields=name,flag"
+      "https://countriesnow.space/api/v0.1/countries/flag/images"
     );
-    const countries: Country[] = await res.json();
-    return countries;
+    const countries = await res.json();
+    return countries.data;
   } catch (error) {
     console.log(error);
 

@@ -10,8 +10,6 @@ type ReservationFormProps = {
 };
 
 function ReservationForm({ cabin, user }: ReservationFormProps) {
-  console.log(user);
-
   const { range } = useReservation();
   const { maxCapacity } = cabin;
 

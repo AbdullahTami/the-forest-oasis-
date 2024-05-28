@@ -27,3 +27,20 @@ export type User = {
   email: string;
   image: string;
 };
+
+export type Guest = {
+  id: number;
+  created_at: Date;
+  fullName: string;
+  email: string;
+  nationality?: string;
+  nationalID?: string;
+  countryFlag?: string;
+};
+
+export type Country = {
+  name: string;
+  iso2: string;
+  flag: string;
+  iso3: string;
+};
