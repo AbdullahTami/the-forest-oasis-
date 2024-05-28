@@ -1,3 +1,5 @@
+import { User } from "next-auth";
+
 export type Cabin = {
   id: number;
   name: string;
@@ -21,12 +23,7 @@ export type Params = {
   cabinId: string;
 };
 
-export type User = {
-  guestId: string;
-  name: string;
-  email: string;
-  image: string;
-};
+export type ExtendedUserType = User & { guestId: number };
 
 export type Guest = {
   id: number;

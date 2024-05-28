@@ -4,6 +4,7 @@ import { User } from "next-auth";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { revalidatePath } from "next/cache";
+import { ExtendedUserType } from "./types";
 
 // Extract country value
 const getNationalityAndCountryFlag = (formData: FormData): [string, string] => {
@@ -29,7 +30,6 @@ export async function updateGuest(formData: FormData) {
     throw new Error("Please provide a valid national ID");
 
   const updateData = { nationality, countryFlag, nationalID };
-  type ExtendedUserType = User & { guestId: number };
 
   const { error } = await supabase
     .from("guests")
