@@ -3,6 +3,7 @@
 import { User } from "next-auth";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
+import { revalidatePath } from "next/cache";
 
 // Extract country value
 const getNationalityAndCountryFlag = (formData: FormData): [string, string] => {
@@ -30,7 +31,7 @@ export async function updateGuest(formData: FormData) {
   const updateData = { nationality, countryFlag, nationalID };
   type ExtendedUserType = User & { guestId: number };
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("guests")
     .update(updateData)
     .eq("id", (session.user as ExtendedUserType).guestId);
@@ -39,7 +40,7 @@ export async function updateGuest(formData: FormData) {
     console.error(error);
     throw new Error("Guest could not be updated");
   }
-  return data;
+  revalidatePath("/account/profile");
 }
 
 export async function signInAction() {
