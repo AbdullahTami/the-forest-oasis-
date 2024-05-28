@@ -50,7 +50,18 @@ export async function updateGuest(formData: FormData) {
 }
 
 export async function deleteReservation(bookingId: number) {
-  await getSession();
+  const session = await getSession();
+
+  // extra security checks pertaining to user bookings
+  const guestBookings = await getBookings(
+    (session.user as ExtendedUserType).guestId
+  );
+
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!guestBookingIds.includes(bookingId))
+    throw new Error("You are not allowed to delete this booking");
+
   const { error } = await supabase
     .from("bookings")
     .delete()
