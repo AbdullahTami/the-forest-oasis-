@@ -72,7 +72,7 @@ export async function getGuest(
   return data;
 }
 
-export async function getBooking(id) {
+export async function getBooking(id: string): Promise<Booking> {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")

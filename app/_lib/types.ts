@@ -20,7 +20,8 @@ export type Settings = {
 };
 
 export type Params = {
-  cabinId: string;
+  cabinId?: string;
+  bookingId?: string;
 };
 
 export type ExtendedUserType = User & { guestId: number };
@@ -48,6 +49,7 @@ export type Booking = {
   startDate: string;
   endDate: string;
   numNights: number;
+  observations?:string,
   numGuests: number;
   totalPrice: number;
   guestId: number;
