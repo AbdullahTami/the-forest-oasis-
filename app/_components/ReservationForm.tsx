@@ -5,6 +5,7 @@ import { useReservation } from "./ReservationContext";
 import Image from "next/image";
 import { differenceInDays } from "date-fns";
 import { createBooking } from "../_lib/actions";
+import SubmitBtn from "./SubmitBtn";
 
 type ReservationFormProps = {
   cabin: Cabin;
@@ -12,7 +13,7 @@ type ReservationFormProps = {
 };
 
 function ReservationForm({ cabin, user }: ReservationFormProps) {
-  const { range } = useReservation();
+  const { range, resetRange } = useReservation();
   const { id, maxCapacity, regularPrice, discount } = cabin;
   const startDate = range?.from;
   const endDate = range?.to;
@@ -47,7 +48,11 @@ function ReservationForm({ cabin, user }: ReservationFormProps) {
       </div>
 
       <form
-        action={createBookingWithData}
+        // action={createBookingWithData}
+        action={async (formData) => {
+          await createBookingWithData(formData);
+          resetRange();
+        }}
         className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
       >
         <div className="space-y-2">
@@ -83,11 +88,13 @@ function ReservationForm({ cabin, user }: ReservationFormProps) {
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <p className="text-primary-300 text-base">Start by selecting dates</p>
-
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-            Reserve now
-          </button>
+          {!(startDate && endDate) ? (
+            <p className="text-primary-300 text-base">
+              Start by selecting dates
+            </p>
+          ) : (
+            <SubmitBtn pendingLabel="Reserving...">Reserve now</SubmitBtn>
+          )}
         </div>
       </form>
     </div>

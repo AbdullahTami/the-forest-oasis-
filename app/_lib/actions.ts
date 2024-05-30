@@ -64,11 +64,16 @@ export async function createBooking(
     extrasPrice: 0,
     totalPrice: bookingData.cabinPrice,
     isPaid: false,
-    hasBreakFast: false,
+    hasBreakfast: false,
     status: "unconfirmed",
   };
 
   console.log(newBooking);
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+  if (error) {
+    throw new Error("Booking could not be created");
+  }
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
 }
 
 export async function deleteBooking(bookingId: number) {
