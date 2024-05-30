@@ -58,3 +58,11 @@ export type Booking = {
   cabinId: number;
   cabins: { name: string; image: string };
 };
+
+export type BookingData= {
+  cabinId: number;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  numNights: number;
+  cabinPrice: number;
+}

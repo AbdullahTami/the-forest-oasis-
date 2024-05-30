@@ -4,7 +4,7 @@ import { User } from "next-auth";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { revalidatePath } from "next/cache";
-import { ExtendedUserType } from "./types";
+import { BookingData, ExtendedUserType } from "./types";
 import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
 
@@ -50,7 +50,28 @@ export async function updateGuest(formData: FormData) {
   revalidatePath("/account/profile");
 }
 
-export async function deleteReservation(bookingId: number) {
+export async function createBooking(
+  bookingData: BookingData,
+  formData: FormData
+) {
+  const session = await getSession();
+
+  const newBooking = {
+    ...bookingData,
+    guestId: (session.user as ExtendedUserType).guestId,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations")?.slice(0, 1000),
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakFast: false,
+    status: "unconfirmed",
+  };
+
+  console.log(newBooking);
+}
+
+export async function deleteBooking(bookingId: number) {
   // await new Promise((res) => setTimeout(res, 3000));
   // throw new Error("useOptimistic test");
   const session = await getSession();
