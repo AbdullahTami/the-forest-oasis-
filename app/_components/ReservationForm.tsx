@@ -36,13 +36,18 @@ function ReservationForm({ cabin, user }: ReservationFormProps) {
         <p>Logged in as</p>
 
         <div className="flex gap-4 items-center">
-          <img
-            // Important to display google profile images
-            referrerPolicy="no-referrer"
-            className="h-8 rounded-full"
-            src={user?.image}
-            alt={user?.name}
-          />
+          {user?.image != null && (
+            <Image
+              // Important to display google profile images
+              referrerPolicy="no-referrer"
+              className="rounded-full"
+              width={32}
+              height={32}
+              src={user.image}
+              alt="user image"
+            />
+          )}
+
           <p>{user?.name}</p>
         </div>
       </div>

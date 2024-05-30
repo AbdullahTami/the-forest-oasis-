@@ -1,4 +1,4 @@
-import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { type Cabin } from "../_lib/types";
 

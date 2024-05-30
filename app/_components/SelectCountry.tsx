@@ -1,8 +1,6 @@
 import { getCountries } from "@/app/_lib/data-service";
 import { type Country } from "../_lib/types";
 
-// Let's imagine your colleague already built this component 😃
-
 async function SelectCountry({ defaultCountry, name, id, className }: any) {
   const countries = await getCountries();
   const flag =

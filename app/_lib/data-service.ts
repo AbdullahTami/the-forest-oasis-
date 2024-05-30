@@ -30,20 +30,6 @@ export async function getCabin(id: string): Promise<Cabin> {
   return data;
 }
 
-export async function getCabinPrice(id) {
-  const { data, error } = await supabase
-    .from("cabins")
-    .select("regularPrice, discount")
-    .eq("id", id)
-    .single();
-
-  if (error) {
-    console.error(error);
-  }
-
-  return data;
-}
-
 export const getCabins = async function (): Promise<Cabin[]> {
   const { data, error } = await supabase
     .from("cabins")
@@ -87,7 +73,7 @@ export async function getBooking(id: string): Promise<Booking> {
   return data;
 }
 
-export async function getBookings(guestId: number) {
+export async function getBookings(guestId: number): Promise<Booking[]> {
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
@@ -178,25 +164,38 @@ export async function createGuest(newGuest: {
 
   return data;
 }
+// export async function getCabinPrice(id) {
+//   const { data, error } = await supabase
+//     .from("cabins")
+//     .select("regularPrice, discount")
+//     .eq("id", id)
+//     .single();
+
+//   if (error) {
+//     console.error(error);
+//   }
+
+//   return data;
+// }
 /*
-export async function createBooking(newBooking) {
-  const { data, error } = await supabase
+  export async function createBooking(newBooking) {
+    const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
     // So that the newly created object gets returned!
     .select()
     .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be created");
+    
+    if (error) {
+      console.error(error);
+      throw new Error("Booking could not be created");
+    }
+    
+    return data;
   }
-
-  return data;
-}
-
-/////////////
-// UPDATE
+  
+  /////////////
+  // UPDATE
 
 // The updatedFields is an object which should ONLY contain the updated data
 export async function updateGuest(id, updatedFields) {
