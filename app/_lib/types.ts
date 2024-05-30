@@ -6,6 +6,8 @@ export type Cabin = {
   maxCapacity: number;
   regularPrice: number;
   discount: number;
+  numNights: number;
+  cabinPrice: number;
   description?: string;
   image: string;
 };
@@ -20,8 +22,8 @@ export type Settings = {
 };
 
 export type Params = {
-  cabinId?: string;
-  bookingId?: string;
+  cabinId: string;
+  bookingId: string;
 };
 
 export type ExtendedUserType = User & { guestId: number };
@@ -49,7 +51,7 @@ export type Booking = {
   startDate: string;
   endDate: string;
   numNights: number;
-  observations?:string,
+  observations?: string;
   numGuests: number;
   totalPrice: number;
   guestId: number;

@@ -51,8 +51,8 @@ export async function updateGuest(formData: FormData) {
 }
 
 export async function deleteReservation(bookingId: number) {
-  await new Promise((res) => setTimeout(res, 3000));
-
+  // await new Promise((res) => setTimeout(res, 3000));
+  // throw new Error("useOptimistic test");
   const session = await getSession();
 
   // extra security checks pertaining to user bookings
