@@ -2,7 +2,7 @@
 import { DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { type Cabin, type Settings } from "../_lib/types";
-import { useReservation } from "./ReservationContext";
+import { useReservation } from "../_contexts/ReservationContext";
 import {
   differenceInDays,
   isPast,
@@ -46,9 +46,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
     displayRange?.to,
     displayRange?.from
   );
-  // if (displayRange?.to && displayRange?.from) {
-  //   numNights = differenceInDays(displayRange?.to, displayRange?.from);
-  // }
+
   const cabinPrice = numNights * (regularPrice - discount);
 
   // SETTINGS

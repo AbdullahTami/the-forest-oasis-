@@ -1,7 +1,7 @@
 "use client";
 import { User } from "next-auth";
 import { type Cabin } from "../_lib/types";
-import { useReservation } from "./ReservationContext";
+import { useReservation } from "../_contexts/ReservationContext";
 import Image from "next/image";
 import { differenceInDays } from "date-fns";
 import { createBooking } from "../_lib/actions";

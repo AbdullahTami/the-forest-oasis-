@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import TextExpander from "./TextExapnder";
+import TextExpander from "./TextExpander";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { type Cabin } from "../_lib/types";
 
