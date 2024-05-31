@@ -1,16 +1,15 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import { cn } from "../_lib/utils";
+import { Bars3BottomLeftIcon } from "@heroicons/react/16/solid";
 import { Session } from "next-auth";
-import { Bars3Icon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+import Link from "next/link";
 import { useNavigation } from "../_contexts/NavigationContext";
 import { useOutsideClick } from "../_lib/hooks";
-// import { useOutsideClick } from "../_lib/hooks";
+import { cn } from "../_lib/utils";
 
 export default function Navigation({ session }: { session: Session | null }) {
   const { showNavbar, openNavbar, closeNavbar } = useNavigation();
-  const { ref } = useOutsideClick(closeNavbar);
+  const { ref } = useOutsideClick(closeNavbar, false);
 
   return (
     <>
@@ -18,12 +17,12 @@ export default function Navigation({ session }: { session: Session | null }) {
         className="fixed md:hidden z-20 top-8 right-7"
         onClick={openNavbar}
       >
-        <Bars3Icon width={30} height={30} />
+        <Bars3BottomLeftIcon width={32} height={32} />
       </button>
       <nav
         ref={ref}
         className={cn(
-          "z-20 w-[200px] fixed top-0 transition right-0 bg-slate-800 h-full text-xl md:hidden block",
+          "z-20 w-[200px] fixed top-0 transition duration-300 right-0 bg-slate-800 h-full text-xl md:hidden block",
           showNavbar ? "translate-x-0" : "translate-x-[200px]"
         )}
       >
