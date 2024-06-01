@@ -1,14 +1,13 @@
 "use client";
-import React, { useState } from "react";
 import {
   EllipsisHorizontalCircleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import { isPast } from "date-fns";
-import { cn } from "../_lib/utils";
 import Link from "next/link";
-import DeleteReservation from "./DeleteReservation";
+import { useState } from "react";
 import { useOutsideClick } from "../_lib/hooks";
+import DeleteReservation from "./DeleteReservation";
 
 type MenuProps = {
   startDate: string;
@@ -20,7 +19,7 @@ export default function Menu({ startDate, bookingId, onDelete }: MenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { ref } = useOutsideClick(() => setIsMenuOpen(false));
   return (
-    <div ref={ref} className={`${isPast(startDate) ? "hidden" : "block"}`}>
+    <div ref={ref} className={isPast(startDate) ? "hidden" : "block"}>
       <button
         onClick={() => setIsMenuOpen((open) => !open)}
         className="sm:hidden absolute top-1 right-1"
