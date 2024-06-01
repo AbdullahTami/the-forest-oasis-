@@ -50,26 +50,18 @@ const navLinks = [
     icon: <UserIcon className="h-6 w-6 text-primary-600" />,
     credentialsRequired: true,
   },
-  //   {
-  //     name: "Sign out",
-  //     href: "/account/profile",
-  //     className:
-  //       "hover:text-accent-400 transition-colors flex items-center gap-4",
-  //     icon: <UserIcon className="h-6 w-6 text-primary-600" />,
-  //     credentialsRequired: true,
-  //   },
 ];
 
 export default function Navigation({ session }: { session: Session | null }) {
   const { showNavbar, openNavbar, closeNavbar } = useNavigation();
   const pathname = usePathname();
   const { ref } = useOutsideClick(closeNavbar, false);
-  let renderedLinks = !session?.user
+  const renderedLinks = !session?.user
     ? navLinks.filter((link) => link.credentialsRequired !== true)
     : navLinks;
 
   return (
-    <>
+    <div className="z-50">
       <button
         className="absolute sm:hidden z-23 top-8 right-7"
         onClick={openNavbar}
@@ -134,6 +126,6 @@ export default function Navigation({ session }: { session: Session | null }) {
           )}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }

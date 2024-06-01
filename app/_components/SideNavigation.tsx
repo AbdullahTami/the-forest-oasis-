@@ -31,7 +31,7 @@ const navLinks = [
 function SideNavigation() {
   const pathname = usePathname();
   return (
-    <nav className="border-r h-full  border-primary-900">
+    <nav className="border-r h-full hidden sm:block  border-primary-900">
       <ul className="flex flex-col h-full  gap-2 text-lg">
         {navLinks.map((link) => (
           <li key={link.name}>

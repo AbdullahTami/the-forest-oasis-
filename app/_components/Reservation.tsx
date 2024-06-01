@@ -17,7 +17,7 @@ export default async function Reservation({ cabin }: { cabin: Cabin }) {
   ]);
   const session = await auth();
   return (
-    <div className="grid md:grid-cols-2 border border-primary-800 ">
+    <div className="grid sm:grid-cols-2 border border-primary-800">
       <DateSelector
         settings={settings}
         bookedDates={bookedDates}

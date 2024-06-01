@@ -13,7 +13,9 @@ async function Header() {
         <Logo />
         <NavigationProvider>
           <Navigation />
-          <MobileNavigation session={session} />
+          <div className="sm:hidden z-50">
+            <MobileNavigation session={session} />
+          </div>
         </NavigationProvider>
       </div>
     </header>
