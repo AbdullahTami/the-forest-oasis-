@@ -4,6 +4,7 @@ import DeleteReservation from "./DeleteReservation";
 import Image from "next/image";
 import Link from "next/link";
 import { Booking } from "../_lib/types";
+import Menu from "./Menu";
 
 export const formatDistanceFromNow = (dateStr: string) =>
   formatDistance(parseISO(dateStr), new Date(), {
@@ -29,18 +30,18 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
   } = booking;
 
   return (
-    <div className="flex border border-primary-800">
-      <div className="relative h-32 aspect-square">
+    <div className="flex border relative flex-col sm:flex-row border-primary-800">
+      <div className="relative sm:h-32 h-48 aspect-square">
         <Image
           src={image}
           alt={`Cabin ${name}`}
           fill
-          className="object-cover border-r border-primary-800"
+          className="object-cover sm:border-r border-primary-800"
         />
       </div>
 
-      <div className="flex-grow px-6 py-3 flex flex-col">
-        <div className="flex items-center justify-between">
+      <div className="flex-grow px-6 sm:py-3 py-5 flex flex-col">
+        <div className="flex items-center mb-5 justify-between">
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
@@ -63,9 +64,9 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
 
-        <div className="flex gap-5 mt-auto items-baseline">
+        <div className="flex sm:flex-row flex-col sm:gap-5  mt-auto items-baseline">
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
-          <p className="text-primary-300">&bull;</p>
+          <p className="text-primary-300 hidden sm:block">&bull;</p>
           <p className="text-lg text-primary-300">
             {numGuests} guest{numGuests > 1 && "s"}
           </p>
@@ -75,7 +76,8 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
         </div>
       </div>
 
-      <div className="flex flex-col border-l border-primary-800 w-[100px]">
+      <Menu startDate={startDate} bookingId={id} onDelete={onDelete} />
+      <div className="sm:flex hidden flex-col border-l border-primary-800 w-[100px]">
         {!isPast(startDate) && (
           <>
             <Link

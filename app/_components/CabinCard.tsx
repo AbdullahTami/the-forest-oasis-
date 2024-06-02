@@ -9,13 +9,13 @@ export default function Page({ cabin }: { cabin: Cabin }) {
     cabin;
 
   return (
-    <div className="flex border-primary-800 border">
-      <div className="flex-1 relative">
+    <div className="sm:flex gap-4 grid border-primary-800 border">
+      <div className="sm:flex-1 h-80 w-full sm:h-auto sm:w-auto relative">
         <Image
           fill
           src={image}
           alt={`Cabin ${name}`}
-          className="object-cover border-r border-primary-800"
+          className="object-cover sm:border-r border-primary-800"
         />
       </div>
       <div className="flex-grow">

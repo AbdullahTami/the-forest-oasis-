@@ -2,7 +2,7 @@
 import { DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { type Cabin, type Settings } from "../_lib/types";
-import { useReservation } from "./ReservationContext";
+import { useReservation } from "../_contexts/ReservationContext";
 import {
   differenceInDays,
   isPast,
@@ -46,9 +46,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
     displayRange?.to,
     displayRange?.from
   );
-  // if (displayRange?.to && displayRange?.from) {
-  //   numNights = differenceInDays(displayRange?.to, displayRange?.from);
-  // }
+
   const cabinPrice = numNights * (regularPrice - discount);
 
   // SETTINGS
@@ -74,7 +72,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
         }
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
+      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800  h-[50px] sm:h-[72px]">
         <div className="flex items-baseline gap-6">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
@@ -91,12 +89,12 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
           </p>
           {numNights ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
+              <p className="bg-accent-600 hidden sm:block px-3 py-2 sm:text-2xl">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="sm:text-lg font-bold uppercase">Total</span>{" "}
+                <span className="sm:text-2xl font-semibold">${cabinPrice}</span>
               </p>
             </>
           ) : null}
@@ -104,7 +102,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
 
         {range?.from || range?.to ? (
           <button
-            className="border border-primary-800 py-2 px-4 text-sm font-semibold"
+            className="sm:border border-primary-800 py-2 px-4 text-sm font-semibold"
             onClick={resetRange}
           >
             Clear

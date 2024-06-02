@@ -33,7 +33,7 @@ export default function Page({ searchParams }: { searchParams: SearchParams }) {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-      <div className="flex justify-end mb-8">
+      <div className="flex sm:justify-end justify-center mb-8">
         <Filter />
       </div>
       <Suspense fallback={<Spinner />} key={filter}>

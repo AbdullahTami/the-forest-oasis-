@@ -10,9 +10,6 @@ export const metadata = {
 export default async function Page() {
   const session = await auth();
   const guest = await getGuest(session?.user?.email);
-  console.log(guest, "Profile page");
-
-  // const nationality = "portugal";
 
   return (
     <div>
@@ -31,7 +28,6 @@ export default async function Page() {
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
           defaultCountry={guest.nationality}
         />
-        {/* <div>Select Country Placeholder here</div> */}
       </UpdateProfileForm>
     </div>
   );
