@@ -1,6 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session, User } from "next-auth";
 import Google from "next-auth/providers/google";
 import { createGuest, getGuest } from "./data-service";
+import { ExtendedUserType } from "./types";
 
 const authConfig = {
   providers: [
@@ -17,24 +18,26 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    authorized({ auth }: { auth: any }) {
+    authorized({ auth }: { auth: any }): boolean {
       return !!auth?.user;
     },
-    // async signIn({ user, account, profile }) {
-    async signIn({ user }: any) {
+    async signIn({ user }: { user: User }): Promise<boolean> {
       try {
-        const existingGuest = await getGuest(user.email);
-        if (!existingGuest)
-          await createGuest({ email: user.email, fullName: user.name });
+        if (user.email && user.name) {
+          const existingGuest = await getGuest(user.email);
+          if (!existingGuest)
+            await createGuest({ email: user.email, fullName: user.name });
+        }
         return true;
       } catch {
         return false;
       }
     },
-    // async session({ session, user }) {},
-    async session({ session }: any) {
-      const guest = await getGuest(session.user.email);
-      session.user.guestId = guest.id;
+    async session({ session }: { session: Session }): Promise<Session> {
+      if (session.user) {
+        const guest = await getGuest(session.user.email);
+        (session.user as ExtendedUserType).guestId = guest.id;
+      }
       return session;
     },
   },
