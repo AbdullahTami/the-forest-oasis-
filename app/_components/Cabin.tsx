@@ -8,14 +8,13 @@ export default function Cabin({ cabin }: { cabin: Cabin }) {
   const { name, maxCapacity, image, description } = cabin;
   return (
     <div className="sm:grid flex flex-col sm:grid-cols-[2fr_4fr] gap-8 sm:gap-20 border border-primary-800 sm:py-3 sm:px-10 mb-24">
-      <div className="relative h-96 w-full sm:scale-[1.15] sm:-translate-x-3">
+      <div className="relative h-96 w-full sm:h-auto sm:w-auto sm:scale-[1.15] sm:-translate-x-3">
         <Image
           fill
           className="object-cover"
           src={image}
           alt={`Cabin ${name}`}
         />
-        {/* Image Placeholder here. */}
       </div>
 
       <div className="px-5 sm:p-0">

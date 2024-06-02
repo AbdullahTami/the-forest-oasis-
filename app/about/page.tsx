@@ -14,9 +14,9 @@ export default async function Page() {
   const cabins = await getCabins();
 
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+    <div className="grid sm:grid-cols-5 sm:gap-x-24 sm:gap-y-32 gap-y-14 text-lg items-center">
+      <div className="sm:col-span-3 oder-2 sm:order-none">
+        <h1 className="sm:text-4xl text-3xl mb-10 text-accent-400 font-medium">
           Welcome to The Wild Oasis
         </h1>
 
@@ -42,7 +42,7 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="col-span-2">
+      <div className="sm:col-span-2 -order-1 sm:order-none">
         <Image
           placeholder="blur"
           quality={80}
@@ -51,7 +51,7 @@ export default async function Page() {
         />
       </div>
 
-      <div className="col-span-2">
+      <div className="sm:col-span-2">
         <Image
           placeholder="blur"
           quality={80}
@@ -60,8 +60,8 @@ export default async function Page() {
         />
       </div>
 
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+      <div className="sm:col-span-3">
+        <h1 className="sm:text-4xl text-3xl mb-10 text-accent-400 font-medium">
           Managed by our family since 1962
         </h1>
 
