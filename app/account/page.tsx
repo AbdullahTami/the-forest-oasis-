@@ -14,7 +14,7 @@ export default async function page() {
       <h2 className="font-semibold text-2xl text-accent-400 sm:mb-7">
         Welcome, {firstName}
       </h2>
-      <p>
+      <p className="sm:hidden">
         View your{" "}
         <Link
           className="underline text-accent-500"
