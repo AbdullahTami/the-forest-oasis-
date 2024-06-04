@@ -13,6 +13,7 @@ import {
 function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
   if (range?.to !== undefined && range?.from !== undefined) {
     return datesArr.some((date) =>
+      // fixed internal date-fns library types annotation
       isWithinInterval(date, { start: range.from, end: range.to })
     );
   }
