@@ -10,7 +10,7 @@ import {
   isWithinInterval,
 } from "date-fns";
 
-function isAlreadyBooked(range: DateRange | undefined, datesArr: Date[]) {
+function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
   if (range?.to !== undefined && range?.from !== undefined) {
     return datesArr.some((date) =>
       isWithinInterval(date, { start: range.from, end: range.to })
@@ -27,7 +27,7 @@ type DateSelectorProps = {
 function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
   const { range, setRange, resetRange } = useReservation();
 
-  const displayRange = isAlreadyBooked(range, bookedDates)
+  const displayRange = isAlreadyBooked(range as DateRange, bookedDates)
     ? ({} as { to: undefined; from: undefined })
     : range;
 
