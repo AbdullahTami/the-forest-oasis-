@@ -14,8 +14,6 @@ export default function Filter() {
 
   function handleFilter(filter: FilterValues) {
     const params = new URLSearchParams(searchParams);
-    console.log(params.toString());
-
     params.set("capacity", filter);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }

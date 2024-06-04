@@ -8,8 +8,6 @@ import { type Cabin } from "../_lib/types";
 export default async function CabinsList({ filter }: { filter: FilterValues }) {
   // noStore();
 
-  console.log(filter);
-
   const cabins: Cabin[] = await getCabins();
 
   if (!cabins.length) return null;

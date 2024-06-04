@@ -16,7 +16,7 @@ export default async function Page() {
   return (
     <div className="grid sm:grid-cols-5 sm:gap-x-24 sm:gap-y-32 gap-y-14 text-lg items-center">
       <div className="sm:col-span-3 oder-2 sm:order-none">
-        <h1 className="sm:text-4xl text-3xl mb-10 text-accent-400 font-medium">
+        <h1 className="sm:text-4xl text-3xl sm:mb-10 mb-2 text-accent-400 font-medium">
           Welcome to The Wild Oasis
         </h1>
 
@@ -61,7 +61,7 @@ export default async function Page() {
       </div>
 
       <div className="sm:col-span-3">
-        <h1 className="sm:text-4xl text-3xl mb-10 text-accent-400 font-medium">
+        <h1 className="sm:text-4xl text-3xl sm:mb-10 mb-2 text-accent-400 font-medium">
           Managed by our family since 1962
         </h1>
 
