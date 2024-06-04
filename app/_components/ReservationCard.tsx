@@ -41,7 +41,7 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
       </div>
 
       <div className="flex-grow px-6 sm:py-3 py-5 flex flex-col">
-        <div className="flex items-center mb-5 justify-between">
+        <div className="flex sm:items-center mb-5 justify-between sm:flex-row gap-4 items-start flex-col-reverse">
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
